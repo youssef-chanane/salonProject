@@ -9,6 +9,7 @@ Dio dio() {
   dio.options.baseUrl = "http://10.0.2.2:8000/api";
 
   dio.options.headers['accept'] = 'Application/Json';
+  // dio.options.receiveDataWhenStatusError
   
 
   return dio;

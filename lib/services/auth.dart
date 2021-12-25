@@ -8,24 +8,23 @@ class Auth extends ChangeNotifier {
   bool _isLoggedIn = false;
   User _user;
   String _token;
-
   bool get authenticated => _isLoggedIn;
   User get user => _user;
 
   final storage = new FlutterSecureStorage();
 
-  void login({Map creds}) async {
+  Future <bool> login({Map creds}) async {
     print(creds);
 
     try {
       Dio.Response response = await dio().post('/sanctum/token', data: creds);
-      print(response.data.toString());
-
       String token = response.data.toString();
-      print(token);
        this.tryToken(token: token);
+       return true;
     } catch (e) {
       print(e);
+      return false;
+      
     }
   }
 
