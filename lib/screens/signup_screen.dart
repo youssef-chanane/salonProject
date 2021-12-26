@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/login_screen.dart';
+import 'package:flutter_laravel/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'views/palatte.dart';
 import 'views/widgets.dart';
 
@@ -14,6 +17,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _password2Controller = TextEditingController();
+  List<String> _errors=[' '];
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class _SignUpState extends State<SignUp> {
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   SizedBox(
@@ -64,6 +69,21 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: TextFormField(
+
+                            //validation
+                            validator: (String value) {
+                              // String pattern = r'(^[a-zA-Z ]*$)';
+                              String pattern = r'(^([\s]*[\S]+).{0,249}$)';
+                              RegExp regExp = new RegExp(pattern);
+                              if (value.isEmpty) {
+                                _errors.add("Username is required");
+                                return ' ';
+                              } else if (!regExp.hasMatch(value)) {
+                                _errors.add("Username is required");
+                                return ' ';
+                              }
+                              return null;
+                            },
                             controller: _namecontroller,
                             decoration: const InputDecoration(
                               filled: true,
@@ -107,11 +127,19 @@ class _SignUpState extends State<SignUp> {
                                 controller: _emailController,
 
                                 //  The validator receives the text that the user has entered.
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a valid email';
+                                validator: (String value) {
+                                  String pattern =
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                  RegExp regExp = new RegExp(pattern);
+                                  if (value.isEmpty) {
+                                    _errors.add("Email is required");
+                                    return '';
+                                  } else if (!regExp.hasMatch(value)) {
+                                    _errors.add("Invalid email");
+                                    return '';
+                                  } else {
+                                    return null;
                                   }
-                                  return null;
                                 },
                                 decoration: const InputDecoration(
                                   filled: true,
@@ -152,18 +180,19 @@ class _SignUpState extends State<SignUp> {
                               child: TextFormField(
                                 controller: _passwordController,
                                 //  The validator receives the text that the user has entered.
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter valid password';
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    _errors.add('Password is required');
+                                    return '';
+                                  } else if (value.length < 4) {
+                                    _errors.add('Password must be at least 4 characters');
+                                    return '';
                                   }
                                   return null;
                                 },
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  errorStyle: TextStyle(
-                                    backgroundColor: Colors.transparent,
-                                    color: Colors.white,
-                                  ),
+                                  
                                   contentPadding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   border: InputBorder.none,
@@ -195,18 +224,15 @@ class _SignUpState extends State<SignUp> {
                               child: TextFormField(
                                 controller: _password2Controller,
                                 //  The validator receives the text that the user has entered.
-                                // validator: (value) {
-                                //   if (_password2Controller.text != _passwordController.text) {
-                                //     return 'Please enter valid password';
-                                //   }
-                                //   return null;
-                                // },
+                                validator: (value) {
+                                  if (value == _passwordController.text) {
+                                    return null;
+                                  }
+                                  _errors.add('passwords didn\'t match. Try Again.');
+                                  return '';
+                                },
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  errorStyle: TextStyle(
-                                    backgroundColor: Colors.transparent,
-                                    color: Colors.white,
-                                  ),
                                   contentPadding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   border: InputBorder.none,
@@ -237,20 +263,49 @@ class _SignUpState extends State<SignUp> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   Map creds = {
                                     'name': _namecontroller.text,
                                     'email': _emailController.text,
                                     'password': _passwordController.text,
-                                    'confirm': _password2Controller.text,
                                   };
-                                  // Validate returns true if the form is valid, or false otherwise.
-                                  //if (_formKey.currentState!.validate()) {
-                                  // If the form is valid, display a snackbar. In the real world,
-                                  // you'd often call a server or save the information in a database.
-                                  print(creds);
-                                  //}
-                                },
+                                    if (_formKey.currentState.validate()) {
+                                      _formKey.currentState.save();
+                                      if(await Provider.of<Auth>(context, listen: false)
+                                        .store(creds: creds)){
+                                          Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                              HomeScreen()));
+                                        }else{
+                                          showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                      title: Text('Error', style:TextStyle(color: Colors.red),),
+                                                      content: Text(
+                                                          'email already exists', style:TextStyle(color: Colors.red),),
+                                                      actions: <Widget>[
+                                                        RaisedButton(
+                                                            child: Text('OK'),
+                                                            onPressed: () {
+                                                              Navigator.of(context).pop();
+                                                            })
+                                                      ]);
+                                          });
+                                        }
+                                        
+                                         
+                                    } else {
+                                      setState(() {
+                                      print(_errors);
+                                      _errors.clear();
+                                    });
+
+                                    }
+                                  },
+                                
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 16.0),

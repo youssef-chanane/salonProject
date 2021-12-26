@@ -171,13 +171,25 @@ class _LoginScreenState extends State<LoginScreen> {
                      if(await Provider.of<Auth>(context, listen: false)
                         .login(creds: creds)){
                           //information valid go to home page
-                          print("true"); 
+                          // print("true"); 
                           Navigator.pop(context);
                         }else{
                             //information invalid show alert
-                            AlertDialog(
-                              title: Text("error"),
-                            );
+                            showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        title: Text('Error', style:TextStyle(color: Colors.red),),
+                                        content: Text(
+                                            'Please enter valid information', style:TextStyle(color: Colors.red),),
+                                        actions: <Widget>[
+                                          RaisedButton(
+                                              child: Text('OK'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              })
+                                        ]);
+                                  });
                           print("enter valid information");
                         }
                           },

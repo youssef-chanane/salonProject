@@ -13,12 +13,34 @@ class Auth extends ChangeNotifier {
 
   final storage = new FlutterSecureStorage();
 
+  //store user 
+    Future <bool> store({Map creds}) async {
+    print(creds['email']);
+
+    // print(data);
+    try{
+      Dio.Response response = await dio().post('/user',data: creds);
+      Map data ={
+        'email': creds['email'],
+        'password': creds['password'],
+        'device_name': 'mobile',
+      
+      };
+      this.login(creds: data);
+      print(data);
+      return true;
+    }catch(e){
+      print(e.toString());
+      return false;
+    }
+  }
   Future <bool> login({Map creds}) async {
     print(creds);
 
     try {
       Dio.Response response = await dio().post('/sanctum/token', data: creds);
       String token = response.data.toString();
+      print(token);
        this.tryToken(token: token);
        return true;
     } catch (e) {
