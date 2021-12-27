@@ -18,6 +18,15 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _password2Controller = TextEditingController();
   List<String> _errors=[' '];
+    @override
+  void initState() {
+    _emailController.text = 'sarbone@gmail.com';
+    _namecontroller.text = 'youssef';
+    _passwordController.text = 'password';
+    _password2Controller.text = 'password';
+
+    super.initState();
+  }
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -227,9 +236,10 @@ class _SignUpState extends State<SignUp> {
                                 validator: (value) {
                                   if (value == _passwordController.text) {
                                     return null;
+                                  }else{
+                                    _errors.add('passwords didn\'t match.');
+                                    return '';
                                   }
-                                  _errors.add('passwords didn\'t match. Try Again.');
-                                  return '';
                                 },
                                 obscureText: true,
                                 decoration: InputDecoration(
@@ -280,24 +290,54 @@ class _SignUpState extends State<SignUp> {
                                               HomeScreen()));
                                         }else{
                                           showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                      title: Text('Error', style:TextStyle(color: Colors.red),),
-                                                      content: Text(
-                                                          'email already exists', style:TextStyle(color: Colors.red),),
-                                                      actions: <Widget>[
-                                                        RaisedButton(
-                                                            child: Text('OK'),
-                                                            onPressed: () {
-                                                              Navigator.of(context).pop();
-                                                            })
-                                                      ]);
-                                          });
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  backgroundColor: Colors.white.withOpacity(0.7),
+                                                  title: Text('Error', style:TextStyle(color: Colors.red), textAlign: TextAlign.center,),
+                                                  content: Text(
+                                                      'Email already exists,try another one', style:TextStyle(color: Colors.red),),
+                                                  actions: <Widget>[
+                                                    RaisedButton(
+                                                        color: Colors.white.withOpacity(0.4),
+                                                        child: Text('OK',),
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        })
+                                                  ]
+                                                 
+                                              );
+                                            }
+                                          );
                                         }
                                         
                                          
                                     } else {
+                                      print(_errors.join("\n"));
+                                      String err=_errors.join("\n");
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  backgroundColor: Colors.white.withOpacity(0.7),
+                                                  title: Text('Error', style:TextStyle(color: Colors.red), textAlign: TextAlign.center,),
+                                                  content: Text(
+                                                      err, style:TextStyle(
+                                                        color: Colors.red,
+                                                        
+                                                        ),),
+                                                  actions: <Widget>[
+                                                    RaisedButton(
+                                                        color: Colors.white.withOpacity(0.4),
+                                                        child: Text('OK',),
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        })
+                                                  ]
+                                                 
+                                              );
+                                            }
+                                          );
                                       setState(() {
                                       print(_errors);
                                       _errors.clear();

@@ -20,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   get altButton => null;
   @override
   void initState() {
-    _emailController.text = '';
-    _passwordController.text = '';
+    _emailController.text = 'sarbone21@gmail.com';
+    _passwordController.text = 'password';
     super.initState();
   }
 
@@ -175,21 +175,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pop(context);
                         }else{
                             //information invalid show alert
-                            showDialog(
+                              showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                        title: Text('Error', style:TextStyle(color: Colors.red),),
+                                        backgroundColor: Colors.white.withOpacity(0.7),
+                                        title: Text('Error', style:TextStyle(color: Colors.red), textAlign: TextAlign.center,),
                                         content: Text(
                                             'Please enter valid information', style:TextStyle(color: Colors.red),),
                                         actions: <Widget>[
                                           RaisedButton(
-                                              child: Text('OK'),
+                                              color: Colors.white.withOpacity(0.4),
+                                              child: Text('OK',),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               })
-                                        ]);
-                                  });
+                                        ]
+                                       
+                                    );
+                                  }
+                              );
                           print("enter valid information");
                         }
                           },
