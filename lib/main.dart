@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/home_screen.dart';
+import 'package:flutter_laravel/screens/map_screen.dart';
 import 'package:flutter_laravel/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: HomeScreen(),
+      home: MapScreen(),
     );
   }
 }
