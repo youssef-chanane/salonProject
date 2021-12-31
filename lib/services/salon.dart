@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class Salon extends ChangeNotifier{
   String _token;
     final storage = new FlutterSecureStorage();
-  //store service 
+  //store salon 
     void store({Map creds}) async {
     print(creds);
 
@@ -23,6 +23,36 @@ class Salon extends ChangeNotifier{
             options: Dio.Options(headers: {'Authorization': 'Bearer $_token'}));
 
       // /user/upgradetosalon
+    }catch(e){
+      print(e.toString());
+    }
+  }
+    //store service 
+    void storeService({Map creds}) async {
+    print(creds);
+
+    try{
+      _token=Auth.token;
+      print(_token);
+      Dio.Response response = await dio().post('/service',data: creds,
+            options: Dio.Options(headers: {'Authorization': 'Bearer $_token'}));
+
+      // /user/upgradetosalon
+    }catch(e){
+      print(e.toString());
+    }
+  }
+
+      //store barber 
+    void storeBarber({Map creds}) async {
+    print(creds);
+
+    try{
+      _token=Auth.token;
+      print(_token);
+      Dio.Response response = await dio().post('/barber',data: creds,
+            options: Dio.Options(headers: {'Authorization': 'Bearer $_token'}));
+
     }catch(e){
       print(e.toString());
     }

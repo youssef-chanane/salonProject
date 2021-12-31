@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print, prefer_final_fields, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/salonupgrade_screen.dart';
+import 'package:flutter_laravel/screens/barber/salon_screen.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
