@@ -40,6 +40,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+<string> This is probably the only one you need. Background location is supported by this -- the caveat is that a blue badge is shown in the status bar when the app is using location service while in the background.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+
+	<key>NSLocationAlwaysUsageDescription</key>
+	
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	
 	<false/>
 </dict>
 </plist>

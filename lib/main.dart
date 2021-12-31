@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/home_screen.dart';
+import 'package:flutter_laravel/screens/login_screen.dart';
 import 'package:flutter_laravel/screens/map_screen.dart';
+import 'package:flutter_laravel/screens/salonupgrade_screen.dart';
 import 'package:flutter_laravel/services/auth.dart';
+import 'package:flutter_laravel/services/salon.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -9,6 +12,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Auth()),
+        ChangeNotifierProvider(create: (context) => Salon()),
       ],
       child: MyApp(),
     ),
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MapScreen(),
+      home: LoginScreen(),
     );
   }
 }

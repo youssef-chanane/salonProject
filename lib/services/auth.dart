@@ -7,9 +7,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class Auth extends ChangeNotifier {
   bool _isLoggedIn = false;
   User _user;
-  String _token;
+  static String _token;
   bool get authenticated => _isLoggedIn;
   User get user => _user;
+  static String get token =>_token;
 
   final storage = new FlutterSecureStorage();
 
@@ -27,7 +28,8 @@ class Auth extends ChangeNotifier {
       
       };
       this.login(creds: data);
-      print(data);
+      // print(data);
+      _token=data.toString();
       return true;
     }catch(e){
       print(e.toString());
@@ -40,7 +42,7 @@ class Auth extends ChangeNotifier {
     try {
       Dio.Response response = await dio().post('/sanctum/token', data: creds);
       String token = response.data.toString();
-      print(token);
+      // print(token);
        this.tryToken(token: token);
        return true;
     } catch (e) {
@@ -59,10 +61,10 @@ class Auth extends ChangeNotifier {
             options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
         this._isLoggedIn = true;
         this._user = User.fromJson(response.data);
-        this._token = token;
+        _token = token;
         this.storeToken(token: token);
         notifyListeners();
-        print(_user);
+        // print(_user);
       } catch (e) {
         print(e);
       }
@@ -88,7 +90,8 @@ class Auth extends ChangeNotifier {
   void cleanUp() async {
     this._user = null;
     this._isLoggedIn = false;
-    this._token = null;
+    _token = null;
     await storage.delete(key: 'token');
   }
+
 }

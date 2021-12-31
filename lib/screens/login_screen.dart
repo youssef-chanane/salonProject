@@ -1,9 +1,11 @@
 // ignore_for_file: avoid_print, prefer_final_fields, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/salonupgrade_screen.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/auth.dart';
+import 'package:flutter_laravel/services/salon.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -172,7 +174,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         .login(creds: creds)){
                           //information valid go to home page
                           // print("true"); 
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
+                                    Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SalonUpgrade()));
                         }else{
                             //information invalid show alert
                               showDialog(
