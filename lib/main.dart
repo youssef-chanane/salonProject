@@ -9,8 +9,10 @@ import 'package:flutter_laravel/screens/map_screen.dart';
 import 'package:flutter_laravel/screens/barber/salon_form.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/services/auth.dart';
+import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
 import 'package:flutter_laravel/services/salon.dart';
+import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +22,8 @@ void main() {
         ChangeNotifierProvider(create: (context) => Auth()),
         ChangeNotifierProvider(create: (context) => Salon()),
         ChangeNotifierProvider(create: (context)=>Gallery()),
+        ChangeNotifierProvider(create: (context)=>Barber()),
+        ChangeNotifierProvider(create: (context)=>Service()),
       ],
       child: MyApp(),
     ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/barber/gallery_form.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
-import 'package:flutter_laravel/services/salon.dart';
+import 'package:flutter_laravel/services/barber.dart';
 import 'package:provider/provider.dart';
 
 
@@ -203,8 +204,8 @@ class _BarberScreen extends State<BarberScreen> {
                                         'years_exp': _yearsController.text,
                                         };
                                       if (_formKey.currentState.validate()) {
-                                        Provider.of<Salon>(context, listen: false)
-                                           .storeBarber(creds: creds);
+                                        Provider.of<Barber>(context, listen: false)
+                                           .store(creds: creds);
                                         print(creds);
                                         Navigator.push(
                                             context,
@@ -277,8 +278,14 @@ class _BarberScreen extends State<BarberScreen> {
                                         'years_exp': _yearsController.text,
                                       };
                                       if (_formKey.currentState.validate()) {
-                                        Provider.of<Salon>(context, listen: false)
-                                           .storeBarber(creds: creds);
+                                        Provider.of<Barber>(context, listen: false)
+                                           .store(creds: creds);
+                                           Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    GalleryForm()));
+                                        
                                         print(creds);
                                       } else {
                                         print(_errors);

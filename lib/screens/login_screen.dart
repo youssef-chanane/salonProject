@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => GalleryForm()));
+                                        builder: (context) => SalonForm()));
                         }else{
                             //information invalid show alert
                               showDialog(

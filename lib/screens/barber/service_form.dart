@@ -4,6 +4,7 @@ import 'package:flutter_laravel/screens/barber/barber_form.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/salon.dart';
+import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
 
 class ServicesScreen extends StatefulWidget {
@@ -333,8 +334,8 @@ class _ServicesScreen extends State<ServicesScreen> {
                                             _descriptionController.text,
                                       };
                                       if (_formKey.currentState.validate()) {
-                                         Provider.of<Salon>(context, listen: false)
-                                           .storeService(creds: creds);
+                                         Provider.of<Service>(context, listen: false)
+                                           .store(creds: creds);
                                         print(creds);
                                         Navigator.push(
                                             context,

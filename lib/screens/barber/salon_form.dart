@@ -9,13 +9,13 @@ import 'package:flutter_laravel/services/salon.dart';
 import 'package:provider/provider.dart';
 
 
-class SalonUpgrade extends StatefulWidget {
-  const SalonUpgrade({Key key}) : super(key: key);
+class SalonForm extends StatefulWidget {
+  const SalonForm({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => _SalonUpgrade();
+  State<StatefulWidget> createState() => _SalonForm();
 }
 
-class _SalonUpgrade extends State<SalonUpgrade> {
+class _SalonForm extends State<SalonForm> {
   TextEditingController _salonnamecontroller = TextEditingController();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
