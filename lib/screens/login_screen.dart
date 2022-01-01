@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, prefer_final_fields, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/barber/salon_screen.dart';
+import 'package:flutter_laravel/screens/barber/gallery_form.dart';
+import 'package:flutter_laravel/screens/barber/salon_form.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     _emailController.text = 'sarbone21@gmail.com';
-    _passwordController.text = 'password';
+    _passwordController.text = '1234';
     super.initState();
   }
 
@@ -178,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SalonUpgrade()));
+                                        builder: (context) => GalleryForm()));
                         }else{
                             //information invalid show alert
                               showDialog(

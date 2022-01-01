@@ -20,10 +20,10 @@ class _SignUpState extends State<SignUp> {
   List<String> _errors=[' '];
     @override
   void initState() {
-    _emailController.text = 'sarbone@gmail.com';
+    _emailController.text = 'sarbone21@gmail.com';
     _namecontroller.text = 'youssef';
-    _passwordController.text = 'password';
-    _password2Controller.text = 'password';
+    _passwordController.text = '1234';
+    _password2Controller.text = '1234';
 
     super.initState();
   }

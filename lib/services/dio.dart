@@ -10,7 +10,7 @@ Dio dio() {
 
   dio.options.headers['accept'] = 'Application/Json';
   // dio.options.receiveDataWhenStatusError
-  
+
 
   return dio;
 }

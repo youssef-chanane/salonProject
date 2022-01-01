@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/barber/barber_screen.dart';
+import 'package:flutter_laravel/screens/barber/barber_form.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/salon.dart';
