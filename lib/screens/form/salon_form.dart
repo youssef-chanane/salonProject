@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/barber/service_form.dart';
+import 'package:flutter_laravel/screens/form/service_form.dart';
 import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';

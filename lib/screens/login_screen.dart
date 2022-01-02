@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print, prefer_final_fields, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/barber/gallery_form.dart';
-import 'package:flutter_laravel/screens/barber/salon_form.dart';
+import 'package:flutter_laravel/screens/display/salons_screen.dart';
+import 'package:flutter_laravel/screens/form/gallery_form.dart';
+import 'package:flutter_laravel/screens/form/salon_form.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
@@ -11,18 +12,20 @@ import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({key}) : super(key: key);
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  var data;
   get altButton => null;
   @override
   void initState() {
+
     _emailController.text = 'sarbone21@gmail.com';
     _passwordController.text = '1234';
     super.initState();
@@ -165,11 +168,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: ElevatedButton(
                           onPressed: () async {
+                            Provider.of<Salon>(context, listen: false)
+                             .index();
                             Map creds = {
                               'email': _emailController.text,
                               'password': _passwordController.text,
                               'device_name': 'mobile',
                             };
+                            // print(Salon.salons);
 
                      if(await Provider.of<Auth>(context, listen: false)
                         .login(creds: creds)){
@@ -179,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SalonForm()));
+                                        builder: (context) => SalonsScreen()));
                         }else{
                             //information invalid show alert
                               showDialog(
@@ -202,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     );
                                   }
                               );
-                          print("enter valid information");
+                          // print("enter valid information");
                         }
                           },
                           child: Padding(

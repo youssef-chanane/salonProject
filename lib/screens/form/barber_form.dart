@@ -1,29 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/barber/barber_form.dart';
+import 'package:flutter_laravel/screens/form/gallery_form.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
-import 'package:flutter_laravel/services/salon.dart';
-import 'package:flutter_laravel/services/service.dart';
+import 'package:flutter_laravel/services/barber.dart';
 import 'package:provider/provider.dart';
 
-class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({Key key}) : super(key: key);
+
+class BarberScreen extends StatefulWidget {
+  const BarberScreen({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => _ServicesScreen();
+  State<StatefulWidget> createState() => _BarberScreen();
 }
 
-class _ServicesScreen extends State<ServicesScreen> {
-  TextEditingController _titlecontroller = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+class _BarberScreen extends State<BarberScreen> {
+  TextEditingController _namecontroller = TextEditingController();
+  TextEditingController _yearsController = TextEditingController();
   List<String> _errors = [' '];
 
   @override
   void initState() {
-    _titlecontroller.text = '';
-    _priceController.text = '';
-    _descriptionController.text = '';
+    _namecontroller.text = '';
+    _yearsController.text = '';
 
     super.initState();
   }
@@ -55,7 +52,7 @@ class _ServicesScreen extends State<ServicesScreen> {
                     height: 80,
                     child: Center(
                         child: Text(
-                      'Barber Services',
+                      'Barbers Informations',
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -75,17 +72,17 @@ class _ServicesScreen extends State<ServicesScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: TextFormField(
-                            controller: _titlecontroller,
+                            controller: _namecontroller,
                             //validation
                             validator: (String value) {
                               // String pattern = r'(^[a-zA-Z ]*$)';
                               String pattern = r'(^([\s]*[\S]+).{0,249}$)';
                               RegExp regExp = new RegExp(pattern);
                               if (value.isEmpty) {
-                                _errors.add("Service title is required");
+                                _errors.add("Barber name is required");
                                 return ' ';
                               } else if (!regExp.hasMatch(value)) {
-                                _errors.add("Service title is required");
+                                _errors.add("Barber name is required");
                                 return ' ';
                               }
                               return null;
@@ -102,11 +99,11 @@ class _ServicesScreen extends State<ServicesScreen> {
                               ),
                               contentPadding: EdgeInsets.symmetric(vertical: 5),
                               border: InputBorder.none,
-                              labelText: "Service title",
+                              labelText: "Barber name",
                               prefixIcon: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: Icon(
-                                  Icons.menu_book_sharp,
+                                  Icons.person,
                                   color: Colors.white,
                                   size: 20,
                                 ),
@@ -129,14 +126,15 @@ class _ServicesScreen extends State<ServicesScreen> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: TextFormField(
-                                controller: _priceController,
+                                controller: _yearsController,
                                 //validation
                                 validator: (String value) {
                                   // String pattern = r'(^[a-zA-Z ]*$)';
-                                  // String pattern = r'(^[0-9]{1}$)';
-                                  // RegExp regExp = new RegExp(pattern);
+                                  String pattern = r'(^[0-9]{1}$)';
+                                  RegExp regExp = new RegExp(pattern);
                                   if (value.isEmpty) {
-                                    _errors.add("Price is required");
+                                    _errors.add(
+                                        "Years of experience' number is required");
                                     return ' ';
                                   }
                                   return null;
@@ -155,23 +153,16 @@ class _ServicesScreen extends State<ServicesScreen> {
                                   contentPadding:
                                       EdgeInsets.symmetric(vertical: 5),
                                   border: InputBorder.none,
-                                  labelText: "Price (dhs)",
+                                  labelText: "Years of experience",
                                   prefixIcon: Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: Icon(
-                                      Icons.price_change_outlined,
+                                      Icons.info_outline_rounded,
                                       color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
-                                  suffixIcon: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        child: Icon(
-                                          Icons.monetization_on_outlined,
-                                        ),
-                                      )),
                                   hintStyle: kBodyText,
                                 ),
                                 style: kBodyText,
@@ -179,52 +170,8 @@ class _ServicesScreen extends State<ServicesScreen> {
                                 textInputAction: TextInputAction.next,
                               ),
                             ),
-                            const SizedBox(height: 20.0),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: TextFormField(
-                                maxLines: null,
-                                controller: _descriptionController,
-                                //validation
-                                validator: (String value) {
-                                  // String pattern = r'(^[a-zA-Z ]*$)';
-                                  String pattern = r'(^([\s]*[\S]+).{0,249}$)';
-                                  RegExp regExp = new RegExp(pattern);
-                                  if (value.isEmpty) {
-                                    _errors.add("Description is required");
-                                    return ' ';
-                                  } else if (!regExp.hasMatch(value)) {
-                                    _errors.add("Description is required");
-                                    return ' ';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  border: InputBorder.none,
-                                  labelText: "Description",
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: Icon(
-                                      Icons.description,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  hintStyle: kBodyText,
-                                ),
-                                style: kBodyText,
-                                keyboardType: TextInputType.multiline,
-                                textInputAction: TextInputAction.next,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20.0,
+                            SizedBox(
+                              height: 30,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -253,88 +200,11 @@ class _ServicesScreen extends State<ServicesScreen> {
                                     ),
                                     onPressed: () {
                                       Map creds = {
-                                        'title': _titlecontroller.text,
-                                        'price': _priceController.text,
-                                        'description':_descriptionController.text,
-                                      };
+                                        'name': _namecontroller.text,
+                                        'years_exp': _yearsController.text,
+                                        };
                                       if (_formKey.currentState.validate()) {
-                                        Provider.of<Salon>(context, listen: false)
-                                           .storeService(creds: creds);
-                                        print(creds);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ServicesScreen()));
-                                      } else {
-                                        print(_errors);
-                                        print(_errors.join("\n"));
-                                        String err = _errors.join("\n");
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                  backgroundColor: Colors.white
-                                                      .withOpacity(0.7),
-                                                  title: Text(
-                                                    'Error',
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  content: Text(
-                                                    err,
-                                                    style: TextStyle(
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    RaisedButton(
-                                                        color: Colors.white
-                                                            .withOpacity(0.4),
-                                                        child: Text(
-                                                          'OK',
-                                                        ),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        })
-                                                  ]);
-                                            });
-                                      }
-
-                                      setState(() {
-                                        print(_errors);
-                                        _errors.clear();
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0),
-                                      child: Text(
-                                        "Add Service",
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 30.0,
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(255, 82, 87, 40),
-                                    ),
-                                    onPressed: () {
-                                      Map creds = {
-                                        'title': _titlecontroller.text,
-                                        'price': _priceController.text,
-                                        'description':
-                                            _descriptionController.text,
-                                      };
-                                      if (_formKey.currentState.validate()) {
-                                         Provider.of<Service>(context, listen: false)
+                                        Provider.of<Barber>(context, listen: false)
                                            .store(creds: creds);
                                         print(creds);
                                         Navigator.push(
@@ -388,7 +258,82 @@ class _ServicesScreen extends State<ServicesScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0),
                                       child: Text(
-                                        "barber informations",
+                                        "Add Barber",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 30.0,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(255, 82, 87, 40),
+                                    ),
+                                    onPressed: () {
+                                      Map creds = {
+                                        'name': _namecontroller.text,
+                                        'years_exp': _yearsController.text,
+                                      };
+                                      if (_formKey.currentState.validate()) {
+                                        Provider.of<Barber>(context, listen: false)
+                                           .store(creds: creds);
+                                           Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    GalleryForm()));
+                                        
+                                        print(creds);
+                                      } else {
+                                        print(_errors);
+                                        print(_errors.join("\n"));
+                                        String err = _errors.join("\n");
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  backgroundColor: Colors.white
+                                                      .withOpacity(0.7),
+                                                  title: Text(
+                                                    'Error',
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  content: Text(
+                                                    err,
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    RaisedButton(
+                                                        color: Colors.white
+                                                            .withOpacity(0.4),
+                                                        child: Text(
+                                                          'OK',
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        })
+                                                  ]);
+                                            });
+                                      }
+
+                                      setState(() {
+                                        print(_errors);
+                                        _errors.clear();
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Text(
+                                        "Continue to Gallery",
                                         style: TextStyle(
                                           fontSize: 17,
                                         ),
