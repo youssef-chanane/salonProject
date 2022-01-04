@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/display/service_screen.dart';
+import 'package:flutter_laravel/screens/form/barber_form.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/salon.dart';
+import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
 
 // import '../view.dart';
@@ -50,14 +53,8 @@ class SalonsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
+                        BackButton(
                             color: Colors.white,
-                          ),
-                          onPressed: () {
-                            print(Salon.salons);
-                          },
                         ),
                       ],
                     ),
@@ -66,7 +63,7 @@ class SalonsScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height,
+                    // height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -122,7 +119,7 @@ class StylistCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 3 - 60,
+      height: 200 ,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Color(0xffFFF0EB),
@@ -149,6 +146,7 @@ class StylistCard extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -164,10 +162,12 @@ class StylistCard extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     print(Salon.salons);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => DetailScreen(stylist)));
+                    Provider.of<Service>(context,listen: false).show();
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ServiceScreen(stylist)));
                   },
                   color: Color(0xff4E295B),
                   shape: RoundedRectangleBorder(

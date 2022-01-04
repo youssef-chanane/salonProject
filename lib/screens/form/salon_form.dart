@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/form/service_form.dart';
 import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
@@ -260,7 +261,7 @@ class _SalonForm extends State<SalonForm> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ServicesScreen()));
+                                        builder: (context) => SalonsScreen()));
                                         print(creds);
                                   }else{
                                     print(_errors);  

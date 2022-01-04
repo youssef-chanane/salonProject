@@ -7,13 +7,13 @@ import 'package:flutter_laravel/services/salon.dart';
 import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
 
-class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({Key key}) : super(key: key);
+class ServicesForm extends StatefulWidget {
+  const ServicesForm({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => _ServicesScreen();
+  State<StatefulWidget> createState() => _ServicesForm();
 }
 
-class _ServicesScreen extends State<ServicesScreen> {
+class _ServicesForm extends State<ServicesForm> {
   TextEditingController _titlecontroller = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
@@ -265,7 +265,7 @@ class _ServicesScreen extends State<ServicesScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ServicesScreen()));
+                                                    ServicesForm()));
                                       } else {
                                         print(_errors);
                                         print(_errors.join("\n"));
@@ -341,7 +341,7 @@ class _ServicesScreen extends State<ServicesScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    BarberScreen()));
+                                                    BarberForm()));
                                       } else {
                                         print(_errors);
                                         print(_errors.join("\n"));

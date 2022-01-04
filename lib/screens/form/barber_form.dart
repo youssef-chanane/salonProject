@@ -6,13 +6,13 @@ import 'package:flutter_laravel/services/barber.dart';
 import 'package:provider/provider.dart';
 
 
-class BarberScreen extends StatefulWidget {
-  const BarberScreen({Key key}) : super(key: key);
+class BarberForm extends StatefulWidget {
+  const BarberForm({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => _BarberScreen();
+  State<StatefulWidget> createState() => _BarberForm();
 }
 
-class _BarberScreen extends State<BarberScreen> {
+class _BarberForm extends State<BarberForm> {
   TextEditingController _namecontroller = TextEditingController();
   TextEditingController _yearsController = TextEditingController();
   List<String> _errors = [' '];
@@ -211,7 +211,7 @@ class _BarberScreen extends State<BarberScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    BarberScreen()));
+                                                    BarberForm()));
                                       } else {
                                         print(_errors);
                                         print(_errors.join("\n"));

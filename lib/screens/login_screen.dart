@@ -168,8 +168,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: ElevatedButton(
                           onPressed: () async {
-                            Provider.of<Salon>(context, listen: false)
-                             .index();
+                            // Provider.of<Salon>(context, listen: false)
+                            //  .index();
                             Map creds = {
                               'email': _emailController.text,
                               'password': _passwordController.text,

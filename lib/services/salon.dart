@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -10,8 +11,8 @@ import 'package:provider/provider.dart';
 class Salon extends ChangeNotifier{
     String _token;
     static  List<dynamic> _salons;
-    final storage = new FlutterSecureStorage();
     static List<dynamic> get salons =>_salons;
+    final storage = new FlutterSecureStorage();
 
   //store salon 
     void store({Map creds}) async {
