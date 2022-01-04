@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

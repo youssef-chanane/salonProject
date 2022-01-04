@@ -160,9 +160,9 @@ class StylistCard extends StatelessWidget {
                   height: 20,
                 ),
                 MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
                     print(Salon.salons);
-                    Provider.of<Service>(context,listen: false).show();
+                    await Provider.of<Service>(context,listen: false).show(stylist["user_id"]);
 
                     Navigator.push(
                         context,

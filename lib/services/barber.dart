@@ -2,10 +2,14 @@ import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_laravel/services/dio.dart';
 import 'package:flutter_laravel/services/auth.dart';
+import 'package:flutter_laravel/services/salon.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Barber extends ChangeNotifier{
   String _token;
+  static List<dynamic> _barber;
+  static List<dynamic> get barber=>_barber;
+
   final storage = new FlutterSecureStorage();
 
       //store barber 
@@ -21,5 +25,11 @@ class Barber extends ChangeNotifier{
       }catch(e){
         print(e.toString());
       }
+    }
+    void show(int id) async {
+      // print(id);
+      Dio.Response response = await dio().get('/barber/$id');
+      _barber=response.data;
+      print(response.data);
     }
 }

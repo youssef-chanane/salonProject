@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text('Salon Profile'),
                 leading: Icon(Icons.home),
                 onTap: () {
-                  Provider.of<Service>(context,listen: false).show();
+                  // Provider.of<Service>(context,listen: false).show();
                   // Navigator.of(context).push(
                   //     MaterialPageRoute(builder: (context) => ServiceScreen()));
                 },

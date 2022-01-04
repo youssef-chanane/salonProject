@@ -24,8 +24,8 @@ class Service extends ChangeNotifier{
       print(e.toString());
     }
   }
-  void show() async {
-    Dio.Response response = await dio().get('/service/1');
+  void show(int id) async {
+    Dio.Response response = await dio().get('/service/$id');
     _services=response.data;
     // Dio.Response response2=await dio().get('salon/1');
     print(response.data);

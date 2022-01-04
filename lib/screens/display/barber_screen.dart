@@ -1,10 +1,9 @@
-import 'dart:io';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_laravel/screens/display/barber_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
+import 'package:flutter_laravel/screens/display/service_screen.dart';
 import 'package:flutter_laravel/services/barber.dart';
-import 'package:flutter_laravel/services/salon.dart';
 // import 'package:flutter_laravel/screens/views/navbar.dart';
 import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +15,13 @@ import 'package:provider/provider.dart';
 //   {'title': 'Color & Blow Dry', 'duration': 90, 'price': 75},
 //   {'title': 'Oil Treatment', 'duration': 30, 'price': 20},
 // ];
-var serviceList=Service.services;
-class ServiceScreen extends StatelessWidget {
+var barbersList=Barber.barber;
+class BarberScreen extends StatelessWidget {
   final stylist;
   // var i=0;
 
 
-  ServiceScreen(this.stylist);
+  BarberScreen(this.stylist);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +78,7 @@ class ServiceScreen extends StatelessWidget {
                             height: 80,
                             ),
                           Text(
-                            'Service List',
+                            'Barbers List',
                             style: TextStyle(
                               
                               fontWeight: FontWeight.bold,
@@ -93,7 +92,7 @@ class ServiceScreen extends StatelessWidget {
                           child: Column(
                             
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(serviceList.length,(i)=> ServiceTile(serviceList[i])),
+                            children: List.generate(barbersList.length,(i)=> BarberTile(barbersList[i])),
                           ),
                         ),
                       ],
@@ -205,9 +204,10 @@ class ServiceScreen extends StatelessWidget {
                     Icons.list_rounded,
                     color: Colors.grey,
                   ),
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => SignUp()));
+                  onTap: () async {
+                    await Provider.of<Service>(context,listen: false).show(stylist['user_id']);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ServiceScreen(stylist)));
                   }),
               InkWell(
                   child: Icon(
@@ -225,9 +225,9 @@ class ServiceScreen extends StatelessWidget {
                   ),
                   onTap: () async {
                     
-                    await Provider.of<Barber>(context,listen: false).show(stylist['user_id']);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => BarberScreen(stylist)));
+                    // await Provider.of<Barber>(context,listen: false).show(stylist['user_id']);
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => BarberScreen(stylist)));
                   }),
               InkWell(
                   child: Icon(
@@ -241,14 +241,13 @@ class ServiceScreen extends StatelessWidget {
             ],
           ),
         ),
-
     );
   }
 }
 
-class ServiceTile extends StatelessWidget {
-  final service;
-  ServiceTile(this.service);
+class BarberTile extends StatelessWidget {
+  final barber;
+  BarberTile(this.barber);
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +262,7 @@ class ServiceTile extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 2 - 60,
                 child: Text(
-                  service['title'],
+                  barber['name'],
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -276,12 +275,16 @@ class ServiceTile extends StatelessWidget {
             ],
           ),
           Text(
-            '\$${service['price']}',
+            '${barber['years_exp']} YoE',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
+
+           Container(
+             child:(barber["is_availible"]==1)? Icon(Icons.circle,color: Colors.green):Icon(Icons.circle,color: Colors.red,))
+          
         ],
       ),
     );
