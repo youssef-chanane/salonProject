@@ -16,6 +16,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Gallery extends ChangeNotifier{
   final storage = new FlutterSecureStorage();
+  static List<dynamic>  _images;
+  static List<dynamic> get images=>_images;
 
 void store(String path) async {
     String _token;
@@ -40,5 +42,16 @@ void store(String path) async {
     }catch(e){
       print(e.toString());
     }
+}
+void show(int id) async {
+  try{
+
+  Dio.Response response = await dio().get('/image/$id');
+  // print(response.data);
+  _images=response.data;
+  print(response.data);
+}catch(e){
+    print(e);
+  }
 }
 }

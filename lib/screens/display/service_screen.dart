@@ -1,9 +1,12 @@
 import 'dart:io';
+// import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/display/barber_screen.dart';
+import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/services/barber.dart';
+import 'package:flutter_laravel/services/gallery.dart';
 import 'package:flutter_laravel/services/salon.dart';
 // import 'package:flutter_laravel/screens/views/navbar.dart';
 import 'package:flutter_laravel/services/service.dart';
@@ -42,6 +45,7 @@ class ServiceScreen extends StatelessWidget {
                       'images/detail_bg.png',
                       fit: BoxFit.fill,
                     ),
+                    // Image.network("http://10.0.2.2:8000/storage/images/EfLSG6WmklHc063a1VGgvBbTVM4yye92YV0bJpIm.jpg"),
                   ],
                 ),
               ),
@@ -214,9 +218,10 @@ class ServiceScreen extends StatelessWidget {
                     Icons.photo_size_select_actual,
                     color: Colors.grey,
                   ),
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => SignUp()));
+                  onTap: () async {
+                    await Provider.of<Gallery>(context,listen: false).show(stylist["user_id"]);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GalleryScreen()));
                   }),
               InkWell(
                   child: Icon(
@@ -235,8 +240,8 @@ class ServiceScreen extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => SignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GalleryScreen()));
                   }),
             ],
           ),

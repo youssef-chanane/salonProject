@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/display/service_screen.dart';
 import 'package:flutter_laravel/services/barber.dart';
+import 'package:flutter_laravel/services/gallery.dart';
 // import 'package:flutter_laravel/screens/views/navbar.dart';
 import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
@@ -214,9 +216,10 @@ class BarberScreen extends StatelessWidget {
                     Icons.photo_size_select_actual,
                     color: Colors.grey,
                   ),
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => SignUp()));
+                  onTap: () async {
+                    await Provider.of<Gallery>(context,listen: false).show(stylist["user_id"]);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GalleryScreen()));
                   }),
               InkWell(
                   child: Icon(

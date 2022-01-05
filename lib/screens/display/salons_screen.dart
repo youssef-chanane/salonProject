@@ -89,7 +89,7 @@ class SalonsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: 
 
-                              List.generate(salons.length,(i)=> StylistCard(salons[i]))
+                              List.generate(salons.length,(i)=> SalonsCard(salons[i]))
 
                               // StylistCard(salons[0]),
                               // StylistCard(salons[1]),
@@ -110,9 +110,9 @@ class SalonsScreen extends StatelessWidget {
   }
 }
 
-class StylistCard extends StatelessWidget {
+class SalonsCard extends StatelessWidget {
   final stylist;
-  StylistCard(this.stylist);
+  SalonsCard(this.stylist);
 
   @override
   Widget build(BuildContext context) {
