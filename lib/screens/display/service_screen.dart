@@ -241,13 +241,13 @@ void onLikeButtonTapped(bool isLiked) async{
                   likeBuilder: (bool isLiked) {
                     return Icon(
                       Icons.thumb_up,
-                      color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
+                      color: Salon.like[stylist["id"]] ? Colors.deepPurpleAccent : Colors.grey,
                       size: 40,
                     );
                   },
                   likeCount: stylist["likes"],
                   countBuilder: (int count, bool isLiked, String text) {
-                    var color = isLiked ? Colors.deepPurpleAccent : Colors.grey;
+                    var color = Salon.like[stylist["id"]] ? Colors.deepPurpleAccent : Colors.grey;
                     Widget result;
                     if (count == 0) {
                       result = Text(
@@ -262,11 +262,14 @@ void onLikeButtonTapped(bool isLiked) async{
                     return result;
                   },
                   onTap: (isLiked)async{
-                     if(isLiked){
+                     if(Salon.like[stylist["id"]]){
                        await Provider.of<Salon>(context,listen: false).deleteLike(stylist["id"]);
+                       stylist["likes"]=stylist["likes"]-1;
                        print("ok");
                      }else{
                        await Provider.of<Salon>(context,listen: false).addLike(stylist["id"]);
+                       stylist["likes"]=stylist["likes"]+1;
+                     
                      }
                       return !isLiked;
                   },
