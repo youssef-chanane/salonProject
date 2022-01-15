@@ -161,30 +161,30 @@ class BarberScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                right: 10,
-                top: MediaQuery.of(context).size.height / 3 - 55,
-                child: MaterialButton(
-                  onPressed: () {},
-                  padding: EdgeInsets.all(10),
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  child: Icon(Icons.thumb_up),
-                ),
-              ),
-              Positioned(
-                right: 10,
-                top: MediaQuery.of(context).size.height / 3 - 55,
-                child: MaterialButton(
-                  onPressed: () {
+              // Positioned(
+              //   right: 10,
+              //   top: MediaQuery.of(context).size.height / 3 - 55,
+              //   child: MaterialButton(
+              //     onPressed: () {},
+              //     padding: EdgeInsets.all(10),
+              //     shape: CircleBorder(),
+              //     color: Colors.white,
+              //     child: Icon(Icons.thumb_up),
+              //   ),
+              // ),
+              // Positioned(
+              //   right: 10,
+              //   top: MediaQuery.of(context).size.height / 3 - 55,
+              //   child: MaterialButton(
+              //     onPressed: () {
 
-                  },
-                  padding: EdgeInsets.all(10),
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  child: Icon(Icons.thumb_up_alt_outlined),
-                ),
-              ),
+              //     },
+              //     padding: EdgeInsets.all(10),
+              //     shape: CircleBorder(),
+              //     color: Colors.white,
+              //     child: Icon(Icons.thumb_up_alt_outlined),
+              //   ),
+              // ),
 
             ],
           ),
@@ -219,7 +219,7 @@ class BarberScreen extends StatelessWidget {
                   onTap: () async {
                     await Provider.of<Gallery>(context,listen: false).show(stylist["user_id"]);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GalleryScreen()));
+                        MaterialPageRoute(builder: (context) => GalleryScreen(stylist)));
                   }),
               InkWell(
                   child: Icon(

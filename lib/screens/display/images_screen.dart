@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/display/service_screen.dart';
+import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
+import 'package:flutter_laravel/services/service.dart';
+import 'package:provider/provider.dart';
+
+import 'barber_screen.dart';
 
 // import 'details.dart';
 
 var _images = Gallery.images;
 
 class GalleryScreen extends StatelessWidget {
+  final stylist;
+  GalleryScreen(this.stylist);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      
       backgroundColor: Color.fromARGB(255, 16, 59, 80),
+      
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+              Positioned(
+                top: 50,
+                left: 20,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             SizedBox(
               height: 40,
             ),
@@ -78,11 +102,68 @@ class GalleryScreen extends StatelessWidget {
                   },
                   itemCount: _images.length,
                 ),
+                
               ),
-            )
+              
+            ),
+
           ],
         ),
       ),
+       bottomNavigationBar: NavigationBarTheme(
+          data: NavigationBarThemeData(
+            indicatorColor: Colors.orange[50],
+            height: 60,
+            labelTextStyle: MaterialStateProperty.all(
+              TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
+          child: NavigationBar(
+            backgroundColor: Colors.orange[50],
+            destinations: [
+              InkWell(
+                  child: Icon(
+                    Icons.list_rounded,
+                    color: Colors.grey,
+                  ),
+                  onTap: () async {
+                    await Provider.of<Service>(context,listen: false).show(stylist['user_id']);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ServiceScreen(stylist)));
+                  }),
+              InkWell(
+                  child: Icon(
+                    Icons.photo_size_select_actual,
+                    color: Colors.grey,
+                  ),
+                  onTap: () async {
+                    await Provider.of<Gallery>(context,listen: false).show(stylist["user_id"]);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GalleryScreen(stylist)));
+                  }),
+              InkWell(
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.grey,
+                  ),
+                  onTap: () async {
+                    
+                    await Provider.of<Barber>(context,listen: false).show(stylist['user_id']);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => BarberScreen(stylist)));
+                  }),
+              InkWell(
+                  child: Icon(
+                    Icons.chat,
+                    color: Colors.grey,
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GalleryScreen(stylist)));
+                  }),
+            ],
+          ),
+        ),
     );
   }
 }

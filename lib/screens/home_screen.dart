@@ -41,9 +41,269 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Home Page'),
       ),
-      body: Center(
-        child: Text('Home Sceen'),
-      ),
+      body:  Container(
+            child: SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 200,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(250, 249, 249, 249),
+                        // color: Color(0xffFFF0EB),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(50),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 700,
+                            ),
+                            Center(
+                              child: Text(
+                                'Find Salon Nearby',
+                                style: TextStyle(
+                                  fontSize: 46,
+                                  fontFamily: 'Cursive',
+                                  color: Color.fromARGB(255, 161, 18, 18),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                RichText(
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 18),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  "Find the best barbershop in your area.\n"),
+                                          TextSpan(
+                                              text:
+                                                  "The barber provides you the most popular barbers near you.")
+                                        ])),
+                                Container(
+                                  child: Image.asset(
+                                    'images/second.jpg',
+                                    fit: BoxFit.fill,
+                                    width: 260,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            RichText(
+                                softWrap: true,
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 143, 89, 89),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Cursive',
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                          text:
+                                              "It was never easier and faster to stay connected with your customers. Now you can do it directly from this barber app."),
+                                    ])),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/img3.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/img2.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/img1.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/img4.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/first.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/5.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          'images/3.jpg',
+                                        ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height,
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 30),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 50,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Top 3 Salons',
+                                        style: TextStyle(
+                                          fontFamily: 'Cursive',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 45,
+                                          color:
+                                              Color.fromARGB(255, 120, 89, 146),
+                                        ),
+                                      ),
+                                    ),
+                                    // StylistCard(stylistData[0]),
+                                    // StylistCard(stylistData[1]),
+                                    // StylistCard(stylistData[2]),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SocialIcon(
+                                  iconSrc: "images/facebook.png",
+                                  press: () {},
+                                ),
+                                SocialIcon(
+                                  iconSrc: "images/instagram.png",
+                                  press: () {},
+                                ),
+                                SocialIcon(
+                                  iconSrc: "images/twitter.png",
+                                  press: () {},
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+      
       drawer: Drawer(child: Consumer<Auth>(builder: (context, auth, child) {
         if (!auth.authenticated) {
           return ListView(
@@ -59,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           );
         } else {
-          if(Auth.role==1){
+          if(Auth.role==2){
               return ListView(
             children: [
               DrawerHeader(
@@ -200,6 +460,31 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         }
       })),
+    );
+  }
+}
+class SocialIcon extends StatelessWidget {
+  final String iconSrc;
+  final Function press;
+  const SocialIcon({
+    Key key,
+    this.iconSrc,
+    this.press,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: press,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.all(20),
+        child: Image.asset(
+          iconSrc,
+          height: 30,
+          width: 30,
+        ),
+      ),
     );
   }
 }

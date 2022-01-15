@@ -36,7 +36,6 @@ var salons=Salon.salons;
 // ];
 
 class SalonsScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -155,6 +154,17 @@ class SalonsCard extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w300,
                   ),
+                  
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  stylist['likes'].toString()+" \u2764️",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                  ),
+                  
                 ),
                 SizedBox(
                   height: 20,

@@ -261,7 +261,7 @@ class _SalonForm extends State<SalonForm> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SalonsScreen()));
+                                        builder: (context) => HomeScreen()));
                                         print(creds);
                                   }else{
                                     print(_errors);  
