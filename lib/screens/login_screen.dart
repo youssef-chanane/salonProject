@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/form/gallery_form.dart';
 import 'package:flutter_laravel/screens/form/salon_form.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/signup_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
@@ -185,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SalonsScreen()));
+                                        builder: (context) => HomeScreen()));
                         }else{
                             //information invalid show alert
                               showDialog(

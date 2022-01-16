@@ -6,9 +6,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/display/barber_screen.dart';
 import 'package:flutter_laravel/screens/display/images_screen.dart';
+import 'package:flutter_laravel/screens/display/reservation_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
+import 'package:flutter_laravel/services/reserver.dart';
 import 'package:flutter_laravel/services/salon.dart';
 // import 'package:flutter_laravel/screens/views/navbar.dart';
 import 'package:flutter_laravel/services/service.dart';
@@ -327,9 +329,12 @@ void onLikeButtonTapped(bool isLiked) async{
                     Icons.chat,
                     color: Colors.grey,
                   ),
-                  onTap: () {
+                  onTap: () async {
+                    await Provider.of<Reserver>(context,listen: false).show(stylist['user_id']);
+                    var reservationList=Provider.of<Reserver>(context, listen: false).reservations;
+
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GalleryScreen(stylist)));
+                        MaterialPageRoute(builder: (context) => ReservationScreen(stylist,reservationList)));
                   }),
             ],
           ),
