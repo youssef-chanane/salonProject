@@ -1,6 +1,7 @@
 import 'dart:io';
 // import 'dart:js';
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/views/navBottom.dart';
 import 'package:flutter_laravel/services/reserver.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +101,9 @@ class ReservationScreen extends StatelessWidget {
               // ReserveForm()
             ],
           ),
-        )
+        ),
+        bottomNavigationBar: NavBottom(stylist),
+
         
       );
 

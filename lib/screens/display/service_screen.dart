@@ -8,6 +8,7 @@ import 'package:flutter_laravel/screens/display/barber_screen.dart';
 import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/reservation_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
+import 'package:flutter_laravel/screens/views/navBottom.dart';
 import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
 import 'package:flutter_laravel/services/reserver.dart';
@@ -95,7 +96,6 @@ void onLikeButtonTapped(bool isLiked) async{
                       'images/detail_bg.png',
                       fit: BoxFit.fill,
                     ),
-                    // Image.network("http://10.0.2.2:8000/storage/images/EfLSG6WmklHc063a1VGgvBbTVM4yye92YV0bJpIm.jpg"),
                   ],
                 ),
               ),
@@ -189,45 +189,14 @@ void onLikeButtonTapped(bool isLiked) async{
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          // Row(
-                          //   children: <Widget>[
-                          //     Icon(
-                          //       Icons.star,
-                          //       size: 16,
-                          //       color: Color(0xffFF8573),
-                          //     ),
-                          //     SizedBox(height: 5),
-                          //     Text(
-                          //       stylist['rating'],
-                          //       style: TextStyle(
-                          //         color: Color(0xffFF8573),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                         
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
-              // Positioned(
-              //   right: 10,
-              //   top: MediaQuery.of(context).size.height / 3 - 55,
-              //   child: IconButton(
-                  
-              //     padding: EdgeInsets.all(10),
-              //     color: Colors.white,
-              //     icon: 
-              //     Icon(Icons.thumb_up),
-              //     onPressed: () {
-              //       print("ok");
-              //     },
-              //   ),
-              // ),
+              
               Positioned(
                 right: 10,
                 top: MediaQuery.of(context).size.height / 3 - 55,
@@ -283,62 +252,7 @@ void onLikeButtonTapped(bool isLiked) async{
           ),
         ),
       ),
-        bottomNavigationBar: NavigationBarTheme(
-          data: NavigationBarThemeData(
-            indicatorColor: Colors.orange[50],
-            height: 60,
-            labelTextStyle: MaterialStateProperty.all(
-              TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
-          child: NavigationBar(
-            backgroundColor: Colors.orange[50],
-            destinations: [
-              InkWell(
-                  child: Icon(
-                    Icons.list_rounded,
-                    color: Colors.grey,
-                  ),
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => SignUp()));
-                  }),
-              InkWell(
-                  child: Icon(
-                    Icons.photo_size_select_actual,
-                    color: Colors.grey,
-                  ),
-                  onTap: () async {
-                    await Provider.of<Gallery>(context,listen: false).show(stylist["user_id"]);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GalleryScreen(stylist)));
-                  }),
-              InkWell(
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  onTap: () async {
-                    
-                    await Provider.of<Barber>(context,listen: false).show(stylist['user_id']);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => BarberScreen(stylist)));
-                  }),
-              InkWell(
-                  child: Icon(
-                    Icons.chat,
-                    color: Colors.grey,
-                  ),
-                  onTap: () async {
-                    await Provider.of<Reserver>(context,listen: false).show(stylist['user_id']);
-                    var reservationList=Provider.of<Reserver>(context, listen: false).reservations;
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ReservationScreen(stylist,reservationList)));
-                  }),
-            ],
-          ),
-        ),
+        bottomNavigationBar: NavBottom(stylist),
 
     );
   }
