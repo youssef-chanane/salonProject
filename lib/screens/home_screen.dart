@@ -349,10 +349,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 title: Text('Salon Profile'),
                 leading: Icon(Icons.home),
-                onTap: () {
-                  // Provider.of<Service>(context,listen: false).show();
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => ServiceScreen()));
+                onTap: () async {
+                  int id=await Provider.of<Auth>(context,listen: false).id;
+                  await Provider.of<Salon>(context,listen: false).show(id);
+                  var salon=Salon.salon;
+                  print(salon);
+                  await Provider.of<Service>(context,listen: false).show(id);
+
+                  print(id);
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ServiceScreen(salon)));
                 },
               ),
               ListTile(

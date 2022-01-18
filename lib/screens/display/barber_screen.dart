@@ -5,8 +5,10 @@ import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/display/service_screen.dart';
 import 'package:flutter_laravel/screens/views/navBottom.dart';
+import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
+import 'package:flutter_laravel/services/reserver.dart';
 // import 'package:flutter_laravel/screens/views/navbar.dart';
 import 'package:flutter_laravel/services/service.dart';
 import 'package:provider/provider.dart';
@@ -18,13 +20,14 @@ import 'package:provider/provider.dart';
 //   {'title': 'Color & Blow Dry', 'duration': 90, 'price': 75},
 //   {'title': 'Oil Treatment', 'duration': 30, 'price': 20},
 // ];
-var barbersList=Barber.barber;
+// var barbersList=Barber.barbers;
 class BarberScreen extends StatelessWidget {
   final stylist;
+  final barbers;
   // var i=0;
 
 
-  BarberScreen(this.stylist);
+  BarberScreen(this.stylist,this.barbers);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +98,7 @@ class BarberScreen extends StatelessWidget {
                           child: Column(
                             
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(barbersList.length,(i)=> BarberTile(barbersList[i])),
+                            children: List.generate(barbers.length,(i)=> BarberTile(barbers[i],stylist)),
                           ),
                         ),
                       ],
@@ -137,54 +140,14 @@ class BarberScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          // Row(
-                          //   children: <Widget>[
-                          //     Icon(
-                          //       Icons.star,
-                          //       size: 16,
-                          //       color: Color(0xffFF8573),
-                          //     ),
-                          //     SizedBox(height: 5),
-                          //     Text(
-                          //       stylist['rating'],
-                          //       style: TextStyle(
-                          //         color: Color(0xffFF8573),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                         
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
-              // Positioned(
-              //   right: 10,
-              //   top: MediaQuery.of(context).size.height / 3 - 55,
-              //   child: MaterialButton(
-              //     onPressed: () {},
-              //     padding: EdgeInsets.all(10),
-              //     shape: CircleBorder(),
-              //     color: Colors.white,
-              //     child: Icon(Icons.thumb_up),
-              //   ),
-              // ),
-              // Positioned(
-              //   right: 10,
-              //   top: MediaQuery.of(context).size.height / 3 - 55,
-              //   child: MaterialButton(
-              //     onPressed: () {
-
-              //     },
-              //     padding: EdgeInsets.all(10),
-              //     shape: CircleBorder(),
-              //     color: Colors.white,
-              //     child: Icon(Icons.thumb_up_alt_outlined),
-              //   ),
+              
               // ),
 
             ],
@@ -199,7 +162,8 @@ class BarberScreen extends StatelessWidget {
 
 class BarberTile extends StatelessWidget {
   final barber;
-  BarberTile(this.barber);
+  final stylist;
+  BarberTile(this.barber,this.stylist);
 
   @override
   Widget build(BuildContext context) {
@@ -235,7 +199,22 @@ class BarberTile extends StatelessWidget {
           ),
 
            Container(
-             child:(barber["is_availible"]==1)? Icon(Icons.circle,color: Colors.green):Icon(Icons.circle,color: Colors.red,))
+             child:(barber["is_availible"]==1)? Icon(Icons.circle,color: Colors.green):Icon(Icons.circle,color: Colors.red,)),
+           (Auth.role==2)?
+          IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () async {
+                    print(barber["id"]);
+                     await Provider.of<Barber>(context, listen: false)
+                      .destroy(barber["id"]);
+                      await Provider.of<Barber>(context, listen: false)
+                      .show(barber["user_id"]);
+                    var barbers= await Provider.of<Barber>(context, listen: false).barbers;
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => BarberScreen(stylist,barbers)));  
+                      print("ok");
+                  }):Container(width: 0.0, height: 0.0)  
           
         ],
       ),

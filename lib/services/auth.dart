@@ -13,12 +13,14 @@ class Auth extends ChangeNotifier {
   bool get authenticated => _isLoggedIn;
   User get user => _user;
   static String get token =>_token;
+  int _id;
+  int get id=>_id;
 
   final storage = new FlutterSecureStorage();
 
   //store user 
     Future <bool> store({Map creds}) async {
-    print(creds['email']);
+    // print(creds['email']);
 
     // print(data);
     try{
@@ -63,7 +65,9 @@ class Auth extends ChangeNotifier {
             options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
         this._isLoggedIn = true;
         _role=response.data['role'];
-        print(response.data['role']);
+        _id=response.data["id"];
+        print(_id);
+        // print(response.data['role']);
         this._user = User.fromJson(response.data);
         _token = token;
         this.storeToken(token: token);

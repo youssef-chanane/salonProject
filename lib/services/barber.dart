@@ -7,8 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Barber extends ChangeNotifier{
   String _token;
-  static List<dynamic> _barber;
-  static List<dynamic> get barber=>_barber;
+  List<dynamic> _barbers;
+  List<dynamic> get barbers=>_barbers;
 
   final storage = new FlutterSecureStorage();
 
@@ -29,7 +29,11 @@ class Barber extends ChangeNotifier{
     void show(int id) async {
       // print(id);
       Dio.Response response = await dio().get('/barber/$id');
-      _barber=response.data;
+      _barbers=response.data;
       print(response.data);
     }
+    void destroy(int id) async {
+    Dio.Response response =await dio().delete('/barber/$id');
+    print(_barbers);
+  }
 }

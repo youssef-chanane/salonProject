@@ -32,10 +32,6 @@ class Reserver extends ChangeNotifier{
   }
   void destroy(int id) async {
     Dio.Response response =await dio().delete('/reserve/$id');
-    // Dio.Response response1 = await dio().get('/reserve/$id');
-    // _reservations=response1.data;
-    // _reservations.remove(0);
-    // show(user_id);
     print(_reservations);
   }
 }

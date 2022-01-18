@@ -2,6 +2,7 @@ import 'dart:io';
 // import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/views/navBottom.dart';
+import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/reserver.dart';
 import 'package:provider/provider.dart';
 
@@ -198,6 +199,7 @@ class ReserveTile extends StatelessWidget {
               ),
             ],
           ),
+          (Auth.role==2)?
           IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () async {
@@ -210,11 +212,7 @@ class ReserveTile extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ReservationScreen(stylist,reservationList)));  
                       print("ok");
-                    // for (int i = 0; i < items.length; i++) {
-                      // items.removeAt(i);
-                      // print(item.message + " " + item.email);
-                    // }
-                  }),
+                  }):Container(width: 0.0, height: 0.0)
         ],
       ),
     );

@@ -9,6 +9,7 @@ import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/reservation_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/views/navBottom.dart';
+import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/barber.dart';
 import 'package:flutter_laravel/services/gallery.dart';
 import 'package:flutter_laravel/services/reserver.dart';
@@ -196,11 +197,12 @@ void onLikeButtonTapped(bool isLiked) async{
                   ),
                 ),
               ),
-              
+
               Positioned(
                 right: 10,
                 top: MediaQuery.of(context).size.height / 3 - 55,
-                child:  LikeButton(
+                child:(Auth.role==1)?
+                LikeButton(
 
                   size: 40,
                   circleColor:
@@ -216,6 +218,7 @@ void onLikeButtonTapped(bool isLiked) async{
                       size: 40,
                     );
                   },
+                  
                   likeCount: stylist["likes"],
                   countBuilder: (int count, bool isLiked, String text) {
                     var color = Salon.like[stylist["id"]] ? Colors.deepPurpleAccent : Colors.grey;
@@ -244,7 +247,10 @@ void onLikeButtonTapped(bool isLiked) async{
                      }
                       return !isLiked;
                   },
-        ), 
+        ) : Container(width: 0.0, height: 0.0)
+
+                  
+                
                 // isLike(context)
               ),
 
@@ -299,3 +305,4 @@ class ServiceTile extends StatelessWidget {
     );
   }
 }
+

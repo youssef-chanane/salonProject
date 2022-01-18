@@ -57,8 +57,9 @@ class NavBottom extends StatelessWidget {
                   onTap: () async {
                     
                     await Provider.of<Barber>(context,listen: false).show(stylist['user_id']);
+                    var barbers =Provider.of<Barber>(context,listen: false).barbers;
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => BarberScreen(stylist)));
+                        MaterialPageRoute(builder: (context) => BarberScreen(stylist,barbers)));
                   }),
               InkWell(
                   child: Icon(

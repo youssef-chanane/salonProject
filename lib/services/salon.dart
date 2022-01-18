@@ -17,6 +17,8 @@ class Salon extends ChangeNotifier{
     static  List<dynamic> _salons;
     static List<dynamic> get salons =>_salons;
     final storage = new FlutterSecureStorage();
+    static var _salon;
+    static get salon=>_salon;
 
   //store salon 
     void store({Map creds}) async {
@@ -47,6 +49,18 @@ class Salon extends ChangeNotifier{
       }
     }
        print(_like);
+  }
+  void show(id) async{
+    Dio.Response response = await dio().get('/salon/$id');
+    _salon=response.data;
+    // for( dynamic _salon in _salons){
+    //   int id=_salon["id"];
+    //   print(id);
+    //   if(_like[id]==null){
+    //    _like[id]=false;
+    //   }
+    // }
+    // print(response.data);
   }
   void addLike(int id) async{
     
