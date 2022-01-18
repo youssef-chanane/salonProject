@@ -173,11 +173,11 @@ class SalonsCard extends StatelessWidget {
                   onPressed: () async {
                     print(Salon.salons);
                     await Provider.of<Service>(context,listen: false).show(stylist["user_id"]);
-
+                    var services=await Provider.of<Service>(context,listen: false).services;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ServiceScreen(stylist)));
+                            builder: (context) => ServiceScreen(stylist,services)));
                   },
                   color: Color(0xff4E295B),
                   shape: RoundedRectangleBorder(

@@ -1,6 +1,7 @@
 // import 'dart:html';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/gallery.dart';
 import 'package:image_picker/image_picker.dart';
@@ -83,21 +84,17 @@ class _GalleryFormState extends State<GalleryForm> {
                                             // print(uploadimage);
                                             Provider.of<Gallery>(context, listen: false)
                                                .store(uploadimage.path);
-                                            // print(uploadimage);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             ()));
-                                              // uploadImage();
-                                              //start uploading image
+                                            Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen()));
                                           }, 
                                           icon: Icon(Icons.file_upload), 
                                           label: Text("UPLOAD IMAGE"),
                                           color: Colors.blueGrey[300],
                                           colorBrightness: Brightness.dark,
-                                          //set brghtness to dark, because deepOrangeAccent is darker coler
-                                          //so that its text color is light
+                                          
                                         )
                                      ) 
                               ),

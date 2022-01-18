@@ -8,6 +8,7 @@ import 'package:flutter_laravel/screens/display/barber_screen.dart';
 import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/reservation_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/navBottom.dart';
 import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/barber.dart';
@@ -27,57 +28,21 @@ import 'package:provider/provider.dart';
 //   {'title': 'Oil Treatment', 'duration': 30, 'price': 20},
 // ];
 bool like=true;
-var serviceList=Service.services;
+// var serviceList=Service.services;
 class ServiceScreen extends StatelessWidget {
   final stylist;
-  // var i=0;
-
-// Widget isLike(context){
-//   if(true){
-
-//     return MaterialButton(
-//       onPressed: ()async {
-//         await Provider.of<Salon>(context,listen: false).addLike(stylist["id"]);
-
-//           like=true;
-//           print(stylist["likes"]);
-//       },
-//        padding: EdgeInsets.all(10),
-//       shape: CircleBorder(),
-//       color: Colors.white,
-//       child: Icon(Icons.thumb_up_alt_outlined),
-//     );
-//   }else{
-//     return MaterialButton(
-//       onPressed: () {
-//           like=false;
-//           print(stylist["likes"]);
-//       },
-//       padding: EdgeInsets.all(10),
-//       shape: CircleBorder(),
-//       color: Colors.white,
-//       child: Icon(Icons.thumb_up),
-//     );              
-//   }
-// }
+  final services;
 void onLikeButtonTapped(bool isLiked) async{
     /// send your request here
     if(isLiked){
       print("not ok");
     }else{
-      // Dio.Response response = await dio().put('/salon/addlike/$stylist["id"]');
-      // stylist=response.data;
-      // await Provider.of<Salon>(context,listen: false).addLike(stylist["id"]);
+      
       print("ok");
     }
-    // final bool success= await sendRequest();
-
-    /// if failed, you can do nothing
-    // return success? !isLiked:isLiked;
-
-    // return !isLiked;
+   
   }
-  ServiceScreen(this.stylist);
+  ServiceScreen(this.stylist,this.services);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,8 +74,12 @@ void onLikeButtonTapped(bool isLiked) async{
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
-                  },
+                    Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                          HomeScreen())
+                                    );                  },
                 ),
               ),
               Positioned(
@@ -148,7 +117,7 @@ void onLikeButtonTapped(bool isLiked) async{
                           child: Column(
                             
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(serviceList.length,(i)=> ServiceTile(serviceList[i])),
+                            children: List.generate(services.length,(i)=> ServiceTile(stylist,services[i])),
                           ),
                         ),
                       ],
@@ -266,7 +235,8 @@ void onLikeButtonTapped(bool isLiked) async{
 
 class ServiceTile extends StatelessWidget {
   final service;
-  ServiceTile(this.service);
+  final stylist;
+  ServiceTile(this.stylist,this.service,);
 
   @override
   Widget build(BuildContext context) {
@@ -300,6 +270,21 @@ class ServiceTile extends StatelessWidget {
               fontSize: 18,
             ),
           ),
+                     (Auth.role==2)?
+          IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () async {
+                    print(service["id"]);
+                     await Provider.of<Service>(context, listen: false)
+                      .destroy(service["id"]);
+                      await Provider.of<Service>(context, listen: false)
+                      .show(service["user_id"]);
+                    var services= await Provider.of<Service>(context, listen: false).services;
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ServiceScreen(stylist,services)));  
+                      print("ok");
+                  }):Container(width: 0.0, height: 0.0) 
         ],
       ),
     );

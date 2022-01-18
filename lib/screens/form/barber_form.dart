@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/form/gallery_form.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/barber.dart';
@@ -36,7 +37,7 @@ class _BarberForm extends State<BarberForm> {
           appBar: AppBar(
             leading: BackButton(),
             title:
-                Text('Upgrade Account', style: TextStyle(color: Colors.white)),
+                Text('Barber Form', style: TextStyle(color: Colors.white)),
             backgroundColor: Colors.black,
           ),
           backgroundColor: Colors.transparent,
@@ -284,7 +285,7 @@ class _BarberForm extends State<BarberForm> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    GalleryForm()));
+                                                    HomeScreen()));
                                         
                                         print(creds);
                                       } else {
@@ -333,7 +334,7 @@ class _BarberForm extends State<BarberForm> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0),
                                       child: Text(
-                                        "Continue to Gallery",
+                                        "Save and go Home",
                                         style: TextStyle(
                                           fontSize: 17,
                                         ),

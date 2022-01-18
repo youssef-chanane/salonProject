@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/display/images_screen.dart';
 import 'package:flutter_laravel/screens/display/salons_screen.dart';
 import 'package:flutter_laravel/screens/display/service_screen.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/navBottom.dart';
 import 'package:flutter_laravel/services/auth.dart';
 import 'package:flutter_laravel/services/barber.dart';
@@ -59,7 +60,12 @@ class BarberScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                          HomeScreen())
+                                    );
                   },
                 ),
               ),

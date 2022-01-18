@@ -36,8 +36,9 @@ class NavBottom extends StatelessWidget {
                   ),
                   onTap: ()async {
                     await Provider.of<Service>(context,listen: false).show(stylist["user_id"]);
+                    var services=await Provider.of<Service>(context,listen: false).services;
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ServiceScreen(stylist)));
+                        MaterialPageRoute(builder: (context) => ServiceScreen(stylist,services)));
                   }),
               InkWell(
                   child: Icon(

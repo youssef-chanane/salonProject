@@ -355,12 +355,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   var salon=Salon.salon;
                   print(salon);
                   await Provider.of<Service>(context,listen: false).show(id);
+                    var services=await Provider.of<Service>(context,listen: false).services;
 
                   print(id);
                   Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ServiceScreen(salon)));
+                            builder: (context) => ServiceScreen(salon,services)));
                 },
               ),
               ListTile(
@@ -428,15 +429,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.blue,
                 ),
               ),
-                ListTile(
-                title: Text('change to salon'),
-                leading: Icon(Icons.home),
-                onTap: () {
-                  
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SalonForm()));
-                },
-              ),
               ListTile(
                 title: Text('Salons list'),
                 leading: Icon(Icons.list_rounded),
@@ -447,15 +439,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(builder: (context) => SalonsScreen()));
                 },
               ),
-               ListTile(
-                title: Text('Contact us'),
-                leading: Icon(Icons.contact_support_outlined),
+                ListTile(
+                title: Text('upgrade to salon'),
+                leading: Icon(Icons.home),
                 onTap: () {
                   
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => SalonForm()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SalonForm()));
                 },
               ),
+              
+              //  ListTile(
+              //   title: Text('Contact us'),
+              //   leading: Icon(Icons.contact_support_outlined),
+              //   onTap: () {
+                  
+              //     // Navigator.of(context).push(
+              //     //     MaterialPageRoute(builder: (context) => SalonForm()));
+              //   },
+              // ),
               ListTile(
                 title: Text('Logout'),
                 leading: Icon(Icons.logout),

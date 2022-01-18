@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_laravel/screens/form/barber_form.dart';
+import 'package:flutter_laravel/screens/home_screen.dart';
 import 'package:flutter_laravel/screens/views/palatte.dart';
 import 'package:flutter_laravel/screens/views/widgets.dart';
 import 'package:flutter_laravel/services/salon.dart';
@@ -341,7 +342,7 @@ class _ServicesForm extends State<ServicesForm> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    BarberForm()));
+                                                    HomeScreen()));
                                       } else {
                                         print(_errors);
                                         print(_errors.join("\n"));
@@ -388,7 +389,7 @@ class _ServicesForm extends State<ServicesForm> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0),
                                       child: Text(
-                                        "barber informations",
+                                        "Save and go Home",
                                         style: TextStyle(
                                           fontSize: 17,
                                         ),
